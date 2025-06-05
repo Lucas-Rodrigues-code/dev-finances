@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+} from 'typeorm';
+import { Transaction } from 'src/modules/transactions/entities/transaction.entity';
 
 @Entity('users')
 export class User {
@@ -14,6 +22,9 @@ export class User {
   @Column()
   password: string;
 
+  @OneToMany(() => Transaction, (transaction) => transaction.user)
+  transactions: Transaction[];
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -23,4 +34,4 @@ export class User {
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);
   }
-} 
+}
