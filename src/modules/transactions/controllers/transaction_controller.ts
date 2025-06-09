@@ -19,8 +19,8 @@ export class TransactionController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body() createUserDto: CreateUserDto): Promise<Transaction> {
-    return this.transactionService.create(CreateTransactionDto);
+  async create(@Body() createUserDto: CreateTransactionDto): Promise<Transaction> {
+    return this.transactionService.create(createUserDto);
   }
 
   @Get()
