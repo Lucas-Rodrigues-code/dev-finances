@@ -21,7 +21,7 @@ export class TransactionService {
     const transaction = await this.transactionRepository.findById(id);
 
     if (!transaction) {
-      throw new NotFoundException('Transação não encontrado');
+      throw new NotFoundException('Transação não encontrada');
     }
 
     return transaction;
@@ -37,7 +37,7 @@ export class TransactionService {
     );
 
     if (!transaction) {
-      throw new NotFoundException('Transação não encontrado');
+      throw new NotFoundException('Transação não encontrada');
     }
 
     return transaction;
@@ -47,7 +47,7 @@ export class TransactionService {
     const deleted = await this.transactionRepository.delete(id);
 
     if (!deleted) {
-      throw new NotFoundException('Transação não encontrado');
+      throw new NotFoundException('Transação não encontrada');
     }
   }
 }
