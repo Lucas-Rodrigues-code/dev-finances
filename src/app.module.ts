@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 //modules
 import { UserModule } from './modules/users/user.module';
 import { TransactionModule } from './modules/transactions/transaction.module';
+import { CategoriesModule } from './modules/categories/categories.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TransactionModule } from './modules/transactions/transaction.module';
     TypeOrmModule.forRoot(databaseConfig),
     UserModule,
     TransactionModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [],
