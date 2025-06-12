@@ -1,4 +1,5 @@
 import { User } from 'src/modules/users/entities/user.entity';
+import { Category } from 'src/modules/categories/entities/category.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -32,6 +33,10 @@ export class Transaction {
 
   @Column()
   categoryId: string;
+
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'categoryId' })
+  category: Category;
 
   @Column()
   date: Date;
