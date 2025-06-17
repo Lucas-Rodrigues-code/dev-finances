@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/users/user.module';
 import { TransactionModule } from './modules/transactions/transaction.module';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { BalanceModule } from './modules/balance/balance.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
     UserModule,
     TransactionModule,
     CategoriesModule,
+    BalanceModule,
   ],
   controllers: [AppController],
   providers: [],
