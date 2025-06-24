@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { databaseConfig } from './config/db';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import {
   KeycloakConnectModule,
@@ -23,13 +23,16 @@ import { BalanceModule } from './modules/balance/balance.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    KeycloakConnectModule.register({
-      authServerUrl: 'http://localhost:8080', 
-      realm: 'meu-app-realm', 
-      clientId: 'nestjs-app', 
-      secret: 'SEU_CLIENT_SECRET', 
-      cookieKey: 'KEYCLOAK_JWT', 
-      logLevels: ['verbose'], 
+    KeycloakConnectModule.registerAsync({
+      useFactory: (configService: ConfigService) => ({
+        authServerUrl: configService.get<string>('KEYCLOAK_AUTH_SERVER_URL', 'http://localhost:8080'),
+        realm: configService.get<string>('KEYCLOAK_REALM', 'dev-finances'),
+        clientId: configService.get<string>('KEYCLOAK_CLIENT_ID', 'client_id_finances'),
+        secret: configService.get<string>('KEYCLOAK_CLIENT_SECRET', ''),
+        cookieKey: configService.get<string>('KEYCLOAK_COOKIE_KEY', 'KEYCLOAK_JWT'),
+        logLevels: configService.get<string>('NODE_ENV') === 'development' ? ['verbose'] : ['error'],
+      }),
+      inject: [ConfigService],
     }),
     TypeOrmModule.forRoot(databaseConfig),
     UserModule,
