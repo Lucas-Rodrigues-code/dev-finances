@@ -3,7 +3,8 @@ import {
   IsNotEmpty, 
   IsString, 
   MinLength, 
-  MaxLength 
+  MaxLength,
+  IsOptional 
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -22,4 +23,8 @@ export class CreateUserDto {
   @MinLength(6, { message: 'Senha deve ter pelo menos 6 caracteres' })
   @MaxLength(50, { message: 'Senha deve ter no máximo 50 caracteres' })
   password: string;
+
+  @IsOptional()
+  @IsString({ message: 'Keycloak ID deve ser uma string' })
+  keycloak_id?: string;
 } 

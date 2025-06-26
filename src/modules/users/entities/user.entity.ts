@@ -22,6 +22,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column({ nullable: true, unique: true })
+  keycloak_id: string; // ID do usuário no Keycloak (sub)
+
   @OneToMany(() => Transaction, (transaction) => transaction.user)
   transactions: Transaction[];
 

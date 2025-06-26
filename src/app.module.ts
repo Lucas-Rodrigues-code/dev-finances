@@ -17,6 +17,7 @@ import { UserModule } from './modules/users/user.module';
 import { TransactionModule } from './modules/transactions/transaction.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { BalanceModule } from './modules/balance/balance.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { BalanceModule } from './modules/balance/balance.module';
       inject: [ConfigService],
     }),
     TypeOrmModule.forRoot(databaseConfig),
+    AuthModule,
     UserModule,
     TransactionModule,
     CategoriesModule,
